@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'blog/styles/blog_base.css' %}" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4">
+
+  <form class="signup" action="" method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div class="form-group">
+      {{ field.errors }}
+      {{ field.label_tag }} {{ field }}
+      {% if field.error_messages %}
+      <span class="help">{{ field.help_text|safe }}</span>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input class="form-button" type="submit" value="Sign Up" />
+    <a class="login-link" href="{% url 'login' %}"><button type="button">Login</button></a>
+    <a href="{% url 'blog_home' %}"><button type="button">Cancel</button></a>
+  </form>
+</div>
+</div>
+</div> <!-- container -->
+{% endblock %}
